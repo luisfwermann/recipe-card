@@ -21,22 +21,15 @@
         ></recipe-card-rating>
       </div>
       <div class="r-card__info__details">
-        <div class="r-card__info__details__time">
-          <icon-clock class="r-card__info__details__time__icon"></icon-clock>
-          {{ $filters.minutesHours(recipe.preparationTimeMinutes) }}
-        </div>
-        <div class="r-card__info__details__energy">
-          <icon-energy
-            class="r-card__info__details__energy__icon"
-          ></icon-energy>
-          {{
-            $filters.energy(
-              recipe.details.energy,
-              recipe.details.units.energy,
-              store.state.user?.energyUnits
-            )
-          }}
-        </div>
+        <recipe-card-time
+          class="r-card__info__details__time"
+          :minutes="recipe.preparationTimeMinutes"
+        ></recipe-card-time>
+        <recipe-card-energy
+          class="r-card__info__details__energy"
+          :energy="recipe.details.energy"
+          :energyUnit="recipe.details.units.energy"
+        ></recipe-card-energy>
         <div class="r-card__info__details__units">
           <recipe-card-unit
             class="r-card__info__details__units__item"
@@ -54,12 +47,12 @@
 
 <script>
 import { computed, inject } from "@vue/runtime-core";
-import IconClock from "./icons/IconClock.vue";
-import IconEnergy from "./icons/IconEnergy.vue";
 import IconHeart from "./icons/IconHeart.vue";
 import IconTrophy from "./icons/IconTrophy.vue";
+import RecipeCardEnergy from "./RecipeCardEnergy.vue";
 import RecipeCardUnit from "./RecipeCardUnit.vue";
 import RecipeCardRating from "./RecipeCardRating.vue";
+import RecipeCardTime from "./RecipeCardTime.vue";
 
 export default {
   props: {
@@ -85,12 +78,12 @@ export default {
   },
   emits: ["click"],
   components: {
-    IconClock,
-    IconEnergy,
     IconHeart,
     IconTrophy,
+    RecipeCardEnergy,
     RecipeCardUnit,
-    RecipeCardRating
+    RecipeCardRating,
+    RecipeCardTime
   }
 };
 </script>
@@ -174,16 +167,8 @@ export default {
 
     .r-card__info__details__time,
     .r-card__info__details__energy {
-      display: flex;
-      align-items: center;
       color: #393c40;
-      white-space: nowrap;
       margin-right: 1em;
-
-      .r-card__info__details__time__icon,
-      .r-card__info__details__energy__icon {
-        margin-right: 0.5em;
-      }
     }
 
     .r-card__info__details__units {

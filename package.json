@@ -24,7 +24,7 @@
     "@vue/cli-service": "~5.0.0-beta.3",
     "@vue/compiler-sfc": "^3.2.2",
     "@vue/eslint-config-prettier": "^6.0.0",
-    "@vue/test-utils": "1.2.2",
+    "@vue/test-utils": "^2.0.0-0",
     "babel-loader": "^8.2.2",
     "babel-preset-vue": "^2.0.2",
     "eslint": "^7.20.0",
@@ -35,8 +35,7 @@
     "prettier": "^2.2.1",
     "sass": "^1.37.5",
     "sass-loader": "^10",
-    "vue-jest": "^4.0.1",
-    "vue-template-compiler": "^2.6.14"
+    "vue-jest": "^5.0.0-0"
   },
   "eslintConfig": {
     "root": true,
@@ -49,7 +48,8 @@
       "@vue/prettier"
     ],
     "parserOptions": {
-      "parser": "@babel/eslint-parser"
+      "parser": "@babel/eslint-parser",
+      "requireConfigFile": false
     },
     "rules": {},
     "overrides": [
@@ -67,8 +67,5 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ],
-  "jest": {
-    "preset": "@vue/cli-plugin-unit-jest"
-  }
+  ]
 }

@@ -9,8 +9,8 @@ const state = reactive({
 
 const methods = {
   init() {
-    UserService.get().then(user => methods.setUser(user));
-    RecipeService.get().then(recipes => methods.setRecipes(recipes));
+    UserService.get().then((user) => methods.setUser(user));
+    RecipeService.get().then((recipes) => methods.setRecipes(recipes));
   },
   setUser(user) {
     state.user = user;

@@ -7,7 +7,7 @@ export const Api = {
   async get(resource) {
     axiosRetry(axios, {
       retries: 3,
-      retryDelay: retryCount => retryCount * 500
+      retryDelay: (retryCount) => retryCount * 500
     });
 
     try {
