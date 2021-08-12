@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <h1>My Recipes</h1>
+  <div id="app" class="app">
+    <h1 class="app__title">My Recipes</h1>
     <recipe-list></recipe-list>
   </div>
 </template>
@@ -21,18 +21,21 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 body {
   background-color: #e4e4e4;
   margin: 0;
 }
 
-#app {
+.app {
   font-family: "proxima-nova", Helvetica, Arial, sans-serif;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin-top: 60px;
+
+  .app__title {
+    text-align: center;
+  }
 }
 </style>

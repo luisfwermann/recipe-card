@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     onClickCard(recipe) {
-      console.log(recipe.title);
+      console.log(`Recipe list received: ${recipe.title}`);
     }
   }
 };

@@ -1,5 +1,5 @@
 <template>
-  <div class="r-card-unit">
+  <div class="r-card-unit" :title="title">
     <div class="r-card-unit__dot" :style="style"></div>
     <div class="r-card-unit__val">{{ units + unitType }}</div>
   </div>
@@ -7,6 +7,7 @@
 
 <script>
 import { computed } from "@vue/reactivity";
+
 export default {
   props: {
     nutrient: {
@@ -32,7 +33,10 @@ export default {
     return {
       style: computed(() => ({
         "background-color": colors[props.nutrient]
-      }))
+      })),
+      title: computed(
+        () => props.nutrient.charAt(0).toUpperCase() + props.nutrient.slice(1)
+      )
     };
   }
 };
