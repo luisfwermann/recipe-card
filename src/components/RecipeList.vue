@@ -1,7 +1,11 @@
 <template>
   <div class="r-list">
     <div v-for="recipe in store.state.recipes" :key="recipe.id">
-      <recipe-card class="r-list__card" :recipe="recipe"></recipe-card>
+      <recipe-card
+        class="r-list__card"
+        :recipe="recipe"
+        @click="onClickCard"
+      ></recipe-card>
     </div>
   </div>
 </template>
@@ -16,6 +20,11 @@ export default {
     return {
       store: inject("store")
     };
+  },
+  methods: {
+    onClickCard(recipe) {
+      console.log(recipe.title);
+    }
   }
 };
 </script>
@@ -28,8 +37,7 @@ export default {
   margin: 0 1em;
 
   .r-list__card {
-    width: 350px;
-    height: calc(100% - 1em);
+    width: 343px;
     margin-bottom: 1em;
   }
 

@@ -1,9 +1,9 @@
 <template>
-  <div class="r-card">
+  <div class="r-card" @click="onClickCard">
     <div class="r-card__image">
       <img class="r-card__image__bg" :src="imgSrc" :alt="recipe.title" />
       <div class="r-card__image__fav">
-        <icon-favorite></icon-favorite>
+        <icon-heart :filled="Math.random() < 0.5"></icon-heart>
       </div>
       <div v-if="recipe.isPremium" class="r-card__image__premium">
         <icon-trophy class="r-card__image__premium_icon"></icon-trophy>
@@ -56,7 +56,7 @@
 import { computed, inject } from "@vue/runtime-core";
 import IconClock from "./icons/IconClock.vue";
 import IconEnergy from "./icons/IconEnergy.vue";
-import IconFavorite from "./icons/IconFavorite.vue";
+import IconHeart from "./icons/IconHeart.vue";
 import IconTrophy from "./icons/IconTrophy.vue";
 import RecipeCardUnit from "./RecipeCardUnit.vue";
 import RecipeCardRating from "./RecipeCardRating.vue";
@@ -77,10 +77,17 @@ export default {
       store: inject("store")
     };
   },
+  methods: {
+    onClickCard() {
+      alert(`Hey! You've just clicked on ${this.recipe.title}`);
+      this.$emit("click", this.recipe);
+    }
+  },
+  emits: ["click"],
   components: {
     IconClock,
     IconEnergy,
-    IconFavorite,
+    IconHeart,
     IconTrophy,
     RecipeCardUnit,
     RecipeCardRating
