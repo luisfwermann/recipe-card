@@ -1,8 +1,9 @@
-import Vue from "vue";
+import filters from "./common/filters";
 import App from "./App.vue";
+import { createApp } from "vue";
 
-Vue.config.productionTip = false;
+const app = createApp(App);
 
-new Vue({
-  render: h => h(App)
-}).$mount("#app");
+app.config.globalProperties.$filters = filters;
+
+app.mount("#app");
