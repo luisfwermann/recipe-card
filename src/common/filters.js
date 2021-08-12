@@ -13,7 +13,7 @@ const filters = {
     if (convertTo === "calories") {
       return `${
         energyUnit === "kcal" ? energy : Math.round(energy / 4.184)
-      } kcal`;
+      } Calories`;
     } else if (convertTo === "kJ") {
       return `${energyUnit === "kJ" ? energy : Math.round(energy * 4.184)} kJ`;
     }

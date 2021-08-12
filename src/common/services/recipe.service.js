@@ -1,10 +1,8 @@
-import axios from "axios";
-import { API_URL } from "../config";
+import Api from "../api";
 
 export const RecipeService = {
   async get() {
-    const response = await axios.get(`${API_URL}/recipes`);
-    return response.data;
+    return Api.get("recipes");
   }
 };
 

@@ -14,6 +14,12 @@
       <div class="r-card__info__title">
         {{ recipe.title }}
       </div>
+      <div class="r-card__info__rating">
+        <recipe-card-rating
+          :rating="recipe.rating.score"
+          :count="recipe.rating.count"
+        ></recipe-card-rating>
+      </div>
       <div class="r-card__info__details">
         <div class="r-card__info__details__time">
           <icon-clock class="r-card__info__details__time__icon"></icon-clock>
@@ -33,6 +39,7 @@
         </div>
         <div class="r-card__info__details__units">
           <recipe-card-unit
+            class="r-card__info__details__units__item"
             v-for="nutrient in nutrients"
             :nutrient="nutrient"
             :units="recipe.details.nutrients[nutrient]"
@@ -46,12 +53,13 @@
 </template>
 
 <script>
-import { inject } from "@vue/runtime-core";
+import { computed, inject } from "@vue/runtime-core";
 import IconClock from "./icons/IconClock.vue";
 import IconEnergy from "./icons/IconEnergy.vue";
 import IconFavorite from "./icons/IconFavorite.vue";
 import IconTrophy from "./icons/IconTrophy.vue";
 import RecipeCardUnit from "./RecipeCardUnit.vue";
+import RecipeCardRating from "./RecipeCardRating.vue";
 
 export default {
   props: {
@@ -60,23 +68,22 @@ export default {
       required: true
     }
   },
-  setup() {
+  setup(props) {
     return {
+      imgSrc: computed(() => {
+        return props.recipe.images[0].url;
+      }),
       nutrients: ["carbs", "proteins", "fats"],
       store: inject("store")
     };
-  },
-  computed: {
-    imgSrc: function() {
-      return this.recipe.images[0].url;
-    }
   },
   components: {
     IconClock,
     IconEnergy,
     IconFavorite,
     IconTrophy,
-    RecipeCardUnit
+    RecipeCardUnit,
+    RecipeCardRating
   }
 };
 </script>
@@ -130,7 +137,7 @@ export default {
   }
 
   .r-card__info {
-    padding: 0.5em 1em;
+    padding: 1em;
 
     .r-card__info__title {
       font-size: 1.125em;
@@ -142,6 +149,11 @@ export default {
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
+      margin-bottom: 1em;
+    }
+
+    .r-card__info__rating {
+      margin-bottom: 0.2em;
     }
 
     .r-card__info__details {
@@ -149,23 +161,40 @@ export default {
       display: grid;
       grid-auto-flow: column;
       align-items: center;
+      grid-template-columns: min-content min-content;
+      font-weight: 500;
     }
 
     .r-card__info__details__time,
-    .r-card__info__details__energy,
-    .r-card__info__details__units {
+    .r-card__info__details__energy {
       display: flex;
       align-items: center;
+      color: #393c40;
+      white-space: nowrap;
+      margin-right: 1em;
 
       .r-card__info__details__time__icon,
       .r-card__info__details__energy__icon {
         margin-right: 0.5em;
       }
     }
+
+    .r-card__info__details__units {
+      display: flex;
+      align-items: center;
+      color: #6f737a;
+      justify-content: flex-end;
+
+      .r-card__info__details__units__item:not(:last-of-type) {
+        margin-right: 0.5em;
+      }
+    }
   }
 
   &:hover {
-    opacity: 0.8;
+    .r-card__image {
+      opacity: 0.8;
+    }
   }
 }
 </style>
